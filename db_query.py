@@ -3,12 +3,13 @@ from datetime import date, timedelta
 import calendar
 
 
-twenty_eight_days_ago = date.today() - timedelta(days=28)
+twenty_eight_days_ago = date.today() - timedelta(days=15)
 
 yesterday = date.today() - timedelta(days=1)
-
-print(f'28 days ago: {twenty_eight_days_ago}\n')
-print(f'yesterday: {yesterday}')
+# print(f'28 days ago: {twenty_eight_days_ago}\n')
+# print(f'yesterday: {yesterday}')
+dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 query = f'''
                 SELECT tcl.cliente, tcl.zona_carga, tcl.elemento, tcl.rpu, tlm.fechayhora, HOUR(fechayhora) as Hora, tlm.tipo, tlm.kwhe as kW, tlm.utc
@@ -19,13 +20,13 @@ query = f'''
                 '''
 
 
-fecha = date.today() + timedelta(days=4) 
+fecha = date.today() + timedelta(days=2)
+
+fechapml = (fecha - timedelta(days=7)).strftime("%Y%m%d")
 fechaNumber = fecha.weekday()
 MonthNumber = fecha.month
 dia = fecha.day
 mes = calendar.month_name[MonthNumber]
 fecha = fecha.strftime('%d/%m/%Y')
-print("OFERTA DE COMPRA DIA: ",fecha)
-print('Dia de la semana: ' ,fechaNumber)
-print('Mes',mes)
-print('Dia: ',dia)
+print("Oferta para el dia: ",fecha)
+print(f'{dias[fechaNumber]}, {dia} de {meses[MonthNumber-1]}')
